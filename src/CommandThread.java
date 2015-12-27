@@ -15,6 +15,13 @@ public class CommandThread extends Observable implements Runnable {
     private boolean busy=false;
     private Scanner scr;
     private String intext;
+    private String ip;
+
+
+    public String getIp() {
+        return ip;
+    }
+
     @Override
     public void run() {
         while (true){
@@ -24,6 +31,10 @@ public class CommandThread extends Observable implements Runnable {
                     sersoc= new ServerSocket(port);
                     soc=sersoc.accept();
                     scr = new Scanner(new InputStreamReader(soc.getInputStream()));
+                  ip= soc.getInetAddress().toString().substring(1);
+                    intext="^Connected";
+                    setChanged();
+                    notifyObservers(new String(intext));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

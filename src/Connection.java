@@ -13,10 +13,12 @@ public class Connection {
     private PrintWriter pw;
     private Scanner scr;
     private Socket soc;
+    private Connection con;
     public Connection(String ip) throws IOException {
         Socket soc = new Socket(ip,port);
         pw = new PrintWriter(soc.getOutputStream());
     }
+
     public void sendmsg(String text){
         pw.flush();
         pw.println(text+'\n');
